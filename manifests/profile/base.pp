@@ -1,3 +1,5 @@
 class stringed::profile::base {
-  include ::ntp
+  class { 'stringed::general::repos': }
+  class { 'stringed::general::packages': }
+  class { 'ntp': }
 }
