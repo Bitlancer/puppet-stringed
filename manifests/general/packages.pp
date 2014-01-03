@@ -1,6 +1,7 @@
 class stringed::general::packages {
   # Duplicate what's in base image (less some installed by other modules):
   package { [
+               augeas,
                bc,
                bind-utils,
                curl,
@@ -16,7 +17,7 @@ class stringed::general::packages {
 #              puppet,
                rsync,
                screen,
-               sudo,
+#              sudo,
                sysstat,
                telnet,
                unzip,
