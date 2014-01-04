@@ -15,4 +15,9 @@ class stringed::general::repos {
     provider => rpm,
     require => Package['epel-release'],
   }
+  yumrepo { 'strings':
+    baseurl => "http://yum.dfw01.socius.strings-service.net/el/6/stable/\$basearch",
+    enabled => 1,
+    gpgcheck => 0,
+  }
 }
