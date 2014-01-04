@@ -1,9 +1,12 @@
 class stringed::profile::base {
-  class { 'resolvconf': } ->
-  class { 'stringed::general::repos': } -> 
-  class { 'stringed::general::packages': } ->
-  class { 'stringed::wrapper::auth': }
-  class { 'ntp': }
-  class { 'motd': }
-  class { 'firewall': }
+  include stringed::general::repos
+  include stringed::general::packages
+  include stringed::general::rackspace
+  include stringed::wrapper::auth
+  include ::resolvconf
+  include ::ntp
+  include ::motd
+  include ::firewall
+
+  Yumrepo['strings'] -> Package<| tag == repo |> -> Package<| tag != repo |>
 }

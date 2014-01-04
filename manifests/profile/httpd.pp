@@ -1,3 +1,3 @@
 class stringed::profile::httpd::bare {
-  class { 'apache':  }
+  include ::apache
 }

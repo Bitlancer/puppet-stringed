@@ -1,4 +1,6 @@
 class stringed::general::repos {
+  tag 'repo'
+
   package { 'epel-release':
     source => 'https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm',
     ensure => present,
