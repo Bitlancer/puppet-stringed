@@ -6,7 +6,7 @@ class stringed::wrapper::auth (
   anchor { 'stringed::wrapper::auth::end': }
 
   exec { 'authconfig update':
-    command => "/usr/sbin/authconfig --enablesssd --enablemkhomedir --update",
+    command => "/usr/sbin/authconfig --enablesssd --enablesssdauth --enablemkhomedir --update",
     unless  => '/bin/egrep "(USEMKHOMEDIR=yes|USESSSD=yes)" /etc/sysconfig/authconfig | wc -l | grep 2',
     require => Anchor['stringed::wrapper::auth::begin'],
   } ->
