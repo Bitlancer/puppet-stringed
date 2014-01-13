@@ -7,6 +7,7 @@ class stringed::profile::base {
   include ::ntp
   include ::motd
   include ::firewall
+  include ::ssh
 
   Yumrepo['strings'] -> Package<| tag == repo |> -> Package<| tag != repo |>
 }
