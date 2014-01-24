@@ -1,4 +1,7 @@
-class stringed::profile::mysql {
+class stringed::profile::mysql (
+  $innodb_buffer_pool_size,
+  $max_connections
+) {
   class { '::mysql::server':
     override_options => { 
       'mysqld' => { 
