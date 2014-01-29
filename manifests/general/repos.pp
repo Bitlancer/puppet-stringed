@@ -18,7 +18,7 @@ class stringed::general::repos {
     require => Package['epel-release'],
   }
   yumrepo { 'strings':
-    name => "Bitlancer Strings Packages",
+    descr => "Bitlancer Strings Packages",
     baseurl => "http://yum.dfw01.socius.strings-service.net/el/6/stable/\$basearch",
     enabled => 1,
     gpgcheck => 0,
