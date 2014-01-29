@@ -1,3 +1,3 @@
 class stringed::profile::redis {
-  class { "redis": }
+  include "::redis"
 }
