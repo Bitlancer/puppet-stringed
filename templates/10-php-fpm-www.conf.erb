@@ -1,4 +1,4 @@
-FastCGIExternalServer /var/www/php.fcgi -idle-timeout 60 -flush -host <%= @listen =%>
+FastCGIExternalServer /var/www/php.fcgi -idle-timeout 60 -flush -host <%= @listen %>
 Alias /php.fcgi /var/www/php.fcgi
 AddType application/x-httpd-php .php
 Action application/x-httpd-php /php.fcgi
