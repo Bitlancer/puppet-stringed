@@ -1,3 +1,3 @@
 class stringed::profile::nodejs {
-  include nodejs
+  include '::nodejs'
 }
