@@ -8,6 +8,7 @@ class stringed::wrapper::apache_phpfpm (
   $php_modules             = [],
 ) {
   include ::apache
+  include apache::mod::ssl
   include php::fpm::daemon
   php::fpm::conf { 'www':
     listen                 => $listen,
