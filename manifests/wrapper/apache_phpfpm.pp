@@ -8,7 +8,16 @@ class stringed::wrapper::apache_phpfpm (
   $php_modules             = [],
 ) {
   include ::apache
-  include apache::mod::ssl
+
+  $apache_mods = hiera_array('stringed::wrapper::apache_phpfpm::apache_modules', ['fastcgi'])
+  apache::mod { $apache_mods: }
+
+  $apache_listen = hiera_array('stringed::wrapper::apache_phpfpm::apache_listen', ['80'])
+  apache::listen { $apache_listen: }
+
+  $apache_name_virtual_hosts = hiera_array('stringed::wrapper::apache_phpfpm::apache_name_virtual_hosts', ['*:80'])
+  apache::namevirtualhost { $apache_name_virtual_hosts: }
+
   include php::fpm::daemon
   php::fpm::conf { 'www':
     listen                 => $listen,
@@ -20,11 +29,10 @@ class stringed::wrapper::apache_phpfpm (
     require                => Package['httpd'],
   }
   php::module { $php_modules: }
-  include apache::mod::fastcgi
   file { '/etc/httpd/conf.d/10-php-fpm-www.conf':
     ensure => present,
     content => template('stringed/10-php-fpm-www.conf.erb')
   }
-  Class['apache::mod::fastcgi'] -> File['/etc/httpd/conf.d/10-php-fpm-www.conf']
+
   File['/etc/httpd/conf.d/10-php-fpm-www.conf'] ~> Service['httpd']
 }
