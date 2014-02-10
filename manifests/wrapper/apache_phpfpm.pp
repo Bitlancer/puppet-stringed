@@ -9,14 +9,15 @@ class stringed::wrapper::apache_phpfpm (
 ) {
   include ::apache
 
-  $apache_mods = hiera_array('stringed::wrapper::apache_phpfpm::apache_modules', ['fastcgi'])
-  apache::mod { $apache_mods: }
-
   $apache_listen = hiera_array('stringed::wrapper::apache_phpfpm::apache_listen', ['80'])
   apache::listen { $apache_listen: }
 
   $apache_name_virtual_hosts = hiera_array('stringed::wrapper::apache_phpfpm::apache_name_virtual_hosts', ['*:80'])
   apache::namevirtualhost { $apache_name_virtual_hosts: }
+
+  # Maybe need to turn this into a create_resources() call
+  $apache_mods = hiera_array('stringed::wrapper::apache_phpfpm::apache_modules', ['fastcgi'])
+  apache::mod { $apache_mods: }
 
   include php::fpm::daemon
   php::fpm::conf { 'www':
@@ -29,10 +30,12 @@ class stringed::wrapper::apache_phpfpm (
     require                => Package['httpd'],
   }
   php::module { $php_modules: }
+
   file { '/etc/httpd/conf.d/10-php-fpm-www.conf':
     ensure => present,
-    content => template('stringed/10-php-fpm-www.conf.erb')
+    content => template('stringed/10-php-fpm-www.conf.erb'),
+    require => Package['mod_fastcgi'],
+    subscribe => Service['httpd']
   }
 
-  File['/etc/httpd/conf.d/10-php-fpm-www.conf'] ~> Service['httpd']
 }
