@@ -1,4 +1,5 @@
 class stringed::profile::base {
+  include stringed::general::firewall
   include stringed::general::repos
   include stringed::general::packages
   include stringed::general::rackspace
