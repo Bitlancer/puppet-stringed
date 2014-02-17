@@ -1,11 +1,5 @@
 class stringed::profile::apache_phpfpm (
-  $firewall_rules = {
-    '100 allow http and https access' => {
-      port => [80, 443],
-      proto => tcp,
-      action => accept
-    }
-  }
+  $firewall_rules = {}
 )
 {
   include stringed::wrapper::apache_phpfpm
