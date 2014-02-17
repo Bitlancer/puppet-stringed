@@ -31,9 +31,9 @@ class stringed::wrapper::apache_phpfpm (
   }
   php::module { $php_modules: }
 
-  file { '/etc/httpd/conf.d/10-php-fpm-www.conf':
+  file { '/etc/httpd/conf.d/php-fpm-www.conf':
     ensure => present,
-    content => template('stringed/10-php-fpm-www.conf.erb'),
+    content => template('stringed/php-fpm-www.conf.erb'),
     require => Package['mod_fastcgi'],
     subscribe => Service['httpd']
   }
