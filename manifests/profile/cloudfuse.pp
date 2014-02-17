@@ -1,3 +1,6 @@
-class stringed::profile::cloudfuse {
-  create_resources(cloudfuse::mount, hiera_hash("stringed::profile::cloudfuse::mounts", {}))
+class stringed::profile::cloudfuse (
+  $mounts = {}
+)
+{
+  create_resources(cloudfuse::mount, hiera_hash("stringed::profile::cloudfuse::mounts", $mounts))
 }
