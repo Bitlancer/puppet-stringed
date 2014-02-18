@@ -8,9 +8,7 @@ class stringed::wrapper::apache_phpfpm (
   $php_modules             = [],
 ) {
 
-  class { ::apache:
-    purge_configs => true
-  }
+  include ::apache
 
   $apache_listen = hiera_array('stringed::wrapper::apache_phpfpm::apache_listen', ['80'])
   apache::listen { $apache_listen: }
