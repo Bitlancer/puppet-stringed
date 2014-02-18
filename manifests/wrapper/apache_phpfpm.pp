@@ -7,7 +7,10 @@ class stringed::wrapper::apache_phpfpm (
   $php_values              = {},
   $php_modules             = [],
 ) {
-  include ::apache
+
+  class { ::apache:
+    purge_configs => true
+  }
 
   $apache_listen = hiera_array('stringed::wrapper::apache_phpfpm::apache_listen', ['80'])
   apache::listen { $apache_listen: }
