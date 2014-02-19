@@ -29,14 +29,15 @@ class stringed::wrapper::apache_phpfpm (
     php_admin_value        => $php_admin_values,
     php_value              => $php_values,
     require                => Package['httpd'],
+    notify 		   => Service['php-fpm']
   }
-  php::module { $php_modules: }
+  php::module { $php_modules: } ~> Service['php-fpm']
 
   file { '/etc/httpd/conf.d/php-fpm-www.conf':
     ensure => present,
     content => template('stringed/php-fpm-www.conf.erb'),
     require => Package['mod_fastcgi'],
-    subscribe => Service['httpd']
+    notify => Service['httpd']
   }
 
 }
