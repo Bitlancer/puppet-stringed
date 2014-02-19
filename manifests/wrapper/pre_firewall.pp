@@ -14,7 +14,7 @@ class stringed::wrapper::pre_firewall {
     },
     '002 accept related and established' => {
       proto => 'all',
-      ctstate => ['RELATED','ESTABLISHED'],
+      state => ['RELATED','ESTABLISHED'],
       action => 'accept'
     },
     '003 accept ssh from everywhere' => {
