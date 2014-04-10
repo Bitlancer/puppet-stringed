@@ -3,5 +3,6 @@ class stringed::profile::openldap (
 )
 {
   include ::openldap
+  include ::openldap::server
   create_resources(firewall, $firewall_rules)
 }
