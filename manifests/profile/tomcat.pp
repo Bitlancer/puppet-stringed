@@ -1,5 +1,5 @@
 class stringed::profile::tomcat (
-  $firewall_rules
+  $firewall_rules = {}
 )
 {
   include ::tomcat
