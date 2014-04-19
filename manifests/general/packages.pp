@@ -12,6 +12,7 @@ class stringed::general::packages {
                mlocate,
                nano,
 #              ntp,
+               openssl,
                patch,
 #              postfix,
 #              puppet,
