@@ -10,6 +10,7 @@ class stringed::profile::apache (
 
   apache::listen { $listen: }
   apache::namevirtualhost { $name_virtual_hosts: }
+  apache::mod { $modules: }
   create_resources(apache::vhosts, $vhosts)
 
   create_resources(firewall, $firewall_rules)
