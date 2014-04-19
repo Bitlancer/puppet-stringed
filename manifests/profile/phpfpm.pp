@@ -1,21 +1,22 @@
 class stringed::profile::phpfpm (
-  $listen                  = '127.0.0.1:9000',
-  $user                    = 'apache',
-  $pm_max_requests         = 500,
-  $catch_workers_output    = 'no',
-  $php_admin_values        = {},
-  $php_values              = {},
-  $php_modules             = [],
+  $pools = {
+    'www' => {
+      listen  => '127.0.0.1:9000',
+      user => 'apache',
+      pm_max_requests => 500,
+      catch_workers_output => 'no',
+      php_admin_values => {},
+      php_values => {},
+      php_modules => []
+    }
+  },
+  $php_modules = [],
+  $firewall_rules = {}
 ) {
-  include php::fpm::daemon
-  php::fpm::conf { 'www':
-    listen                 => $listen,
-    user                   => $user,
-    pm_max_requests        => $pm_max_requests,
-    catch_workers_output   => $catch_workers_output,
-    php_admin_value        => $php_admin_values,
-    php_value              => $php_values,
-    require                => Package['httpd'],
-  }
-  php::module { $php_modules: }
+  
+  include ::php::fpm::daemon
+  create_resources(php::fpm::conf, hiera_hash('stringed::profile::php-fpm::pools', $pools))
+  php::module { $php_modules: } ~> Service['php-fpm']
+  
+  create_resources(firewall, $firewall_rules)
 }
