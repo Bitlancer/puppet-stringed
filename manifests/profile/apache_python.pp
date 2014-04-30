@@ -1,5 +1,5 @@
 class stringed::profile::apache_python (
-  firewall_rules = {}
+  $firewall_rules = {}
 ) {
   
   include ::stringed::profile::apache
