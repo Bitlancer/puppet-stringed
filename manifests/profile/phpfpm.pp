@@ -6,8 +6,7 @@ class stringed::profile::phpfpm (
       pm_max_requests => 500,
       catch_workers_output => 'no',
       php_admin_values => {},
-      php_values => {},
-      php_modules => []
+      php_values => {}
     }
   },
   $php_modules = [],
