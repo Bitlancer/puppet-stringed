@@ -11,5 +11,5 @@ class stringed::profile::base {
   include ::postfix::server
   include ssh::sshd_config
   
-  Yumrepo['strings'] -> Package<| tag == repo |> -> Package<| tag != repo |>
+  Package <| provider == 'rpm' |> -> Yumrepo <| |> -> Package <| provider != 'rpm' |>
 }
